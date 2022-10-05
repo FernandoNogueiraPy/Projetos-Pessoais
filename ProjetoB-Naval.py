@@ -6,8 +6,9 @@ while True:    #cada barco está localizado em um número e acertando o número 
         destroyer = [5,19]   
         fragata = [17,15,11]    
 
+# teste 
         tiro = int(input('Faça um disparo de Artilharia:'))      
-          
+
         if tiro in corveta:     
             print(f"Você Afundou uma Corveta")      
         elif tiro in destroyer:     
