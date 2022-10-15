@@ -46,6 +46,7 @@ def falencias():
 
         chrome.find_element(By.XPATH,'//*[@id="confirmacaoInformacoes"]').click()
         chrome.find_element(By.XPATH,'//*[@id="pbEnviar"]').click()
+        print('Documento: Falencias emitido com sucesso.')
 
 
 
@@ -71,6 +72,7 @@ def falencias():
 
               chrome.find_element(By.XPATH,'//*[@id="confirmacaoInformacoes"]').click()
               chrome.find_element(By.XPATH,'//*[@id="pbEnviar"]').click()
+              print('Documento: Falencias emitido com sucesso.')
 
         #Feminino
           else :
@@ -89,6 +91,7 @@ def falencias():
 
             chrome.find_element(By.XPATH,'//*[@id="confirmacaoInformacoes"]').click()
             chrome.find_element(By.XPATH,'//*[@id="pbEnviar"]').click()
+            print('Documento: Falencias emitido com sucesso.')
   chrome.quit()
 def Civeis():
 #Leitura dos dados = nome do arquivo = Civeis
@@ -401,5 +404,6 @@ th(target=Saj5).start()
 th(target=acoes).start()
 th(target=sivec).start()
 
+#versão 2 
 
 #documento 2 
