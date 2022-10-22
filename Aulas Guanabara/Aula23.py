@@ -1,9 +1,9 @@
-p1 = int(input('Digite um número '))
+p1 = (input('Digite um número '))
 
-milhares = int.p1[0]
-centenas = int.p1[1]
-dezenas = int.p1[2]
-unidades = int.p1[3]
+milhares = p1[0]
+centenas = p1[1]
+dezenas = p1[2]
+unidades = p1[3]
 
 print(f'Esse número representa a casa dos milhares ',{milhares})
 print(f'Esse número representa a casa das centenas ',{centenas})

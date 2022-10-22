@@ -20,14 +20,11 @@ for index,row in df.iterrows():
     chrome = webdriver.Chrome()
     chrome.get(url_do_forms)
 
-    time.sleep(2) 
+    time.sleep(5) 
 
     #Documento selecionado nessa função = Falencias
     elemento_selecao = Select(chrome.find_element(By.XPATH,'//*[@id="cdModelo"]'))
-    elemento_selecao.select_by_index(6)
-    
-
-
+    elemento_selecao.select_by_index(3)
     
 
 #Se for Pessoa Júridica ele preenchera automatico os dados
@@ -40,21 +37,26 @@ for index,row in df.iterrows():
      
      elemento_texto_Nome.send_keys(row["Nome"])
      elemento_texto_Rg.send_keys(row["Rg"])
+
+     time.sleep(2)
      
      #Preencher Email
      chrome.find_element(By.ID,"identity.solicitante.deEmail").send_keys('fernandomoltt101@gmail.com') 
      #Clikar em confirmação 
      chrome.find_element(By.ID,"confirmacaoInformacoes").click()
      #Clikar em Enviar
-     chrome.find_element(By.ID,"pbEnviar")
+     chrome.find_element(By.ID,"pbEnviar").click()
+
      print('Documento de Falencias emitido com Sucesso.')
+
+     time.sleep(15)
 
 
 #Se For Pessoa Fisica ele preenchera os automatico os dados 
     else :
         elemento_texto_Pessoa = chrome.find_element(By.XPATH,'//*[@id="tpPessoaF"]').click()
 
-        time.sleep(1)
+        time.sleep(2)
     
       #Masculino 
         if row["Sexo"] == "M": 
@@ -84,7 +86,7 @@ for index,row in df.iterrows():
 
             print('Documento de Falencias emitido com Sucesso.')
             #Copiar protocolo 
-            #elemento_texto_protocolo = chrome.find_elements(By.XPATH,'//*[@id="deEmail"]/td[1]/label')[0].text
+            elemento_texto_protocolo = chrome.find_elements(By.XPATH,'//*[@id="deEmail"]/td[1]/label')
             #print(elemento_texto_protocolo)
 
       #Feminino
@@ -105,13 +107,17 @@ for index,row in df.iterrows():
             elemento_texto_Cpf.send_keys(row["Cpf"])
             elemento_texto_Nome_Mae.send_keys(row["Nome mãe"])
             elemento_texto_Datanasc.send_keys(row["Datanasc"])
+            time.sleep(3)
 
             chrome.find_element(By.ID,"identity.solicitante.deEmail").send_keys('fernandomoltt101@gmail.com') 
             #Clikar em confirmação 
             chrome.find_element(By.ID,"confirmacaoInformacoes").click()
             #Clikar em Enviar
-            chrome.find_element(By.ID,"pbEnviar")
+            chrome.find_element(By.ID,"pbEnviar").click()
             print('Documento de Falencias emitido com Sucesso.')
+
+
+            time.sleep(15)
        
     chrome.quit()         
 

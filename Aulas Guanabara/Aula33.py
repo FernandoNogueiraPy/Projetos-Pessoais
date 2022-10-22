@@ -35,3 +35,6 @@ if b1 == b3 > b2:
     print('os dois maiores sao {} e {}'.format(b1, b3))
 if b3 == b2 > b1:
     print('os dois maiores sao {} e {}'.format(b3, b2))
+
+
+    
