@@ -1,5 +1,6 @@
 #Batalha Naval
 
+
 while True:    #cada barco está localizado em um número e acertando o número o barco será destruido.   
     try:  #posição das embaracações     
         corveta = [1,3,9,6,8]   
@@ -27,3 +28,5 @@ while True:    #cada barco está localizado em um número e acertando o número 
         else:     
             print(f"Você jogou na posição {torpedo} " )  
     except:  print(f"Digite apenas Números.")
+
+

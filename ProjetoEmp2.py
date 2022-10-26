@@ -12,13 +12,14 @@ pergunta = input('Digite o número do lote corretamente').strip()
 
 result = collection.find_one({'LOTE': pergunta })
 
+#Colocar todas colunas importantes.
 if result: 
     print('O LOTE FOI ENCONTRADO !!')
-    print(result)
+    print('FILIAL : '+result['FILIAL'],'\nValor : '+ result['VALOR'])
 
 else :
     print('O LOTE NÃO FOI ENCONTRADO !!')
-    print('')
+    
 
 
 

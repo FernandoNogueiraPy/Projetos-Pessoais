@@ -19,7 +19,6 @@ url_do_forms = "https://esaj.tjsp.jus.br/sco/abrirCadastro.do"
  
 
 #Leitura dos dados = nome do arquivo = Falencias 
-
 for index,row in df.iterrows():
 
   print("index: " + str(index) + " o nome é " + row ["Nome"])

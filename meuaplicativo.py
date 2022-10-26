@@ -14,6 +14,12 @@ class meuaplicativo(App):
     btn = Button(text='Click Aqui')
     btn.font_size = 30
 
+    if btn == True :
+      print (' voce e lindo')
+
+    else :
+      print(' voce e normal ')
+
 
 
     box.add_widget(label)
