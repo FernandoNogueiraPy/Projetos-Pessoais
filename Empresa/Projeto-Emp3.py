@@ -43,45 +43,86 @@ for index,row in df.iterrows():
 
     #Selecionando a Marca
     elemento_selecione_marca = chrome.find_element(By.XPATH,'//*[@id="selectMarcacarro_chosen"]').click()
-
     elemento_marca = chrome.find_element(By.XPATH,'//*[@id="selectMarcacarro_chosen"]/div/div/input')
-    elemento_marca.send_keys(row["MARCA"])
-    elemento_marca.send_keys(Keys.ENTER)
+    correto_marca = (row["MARCA"])
+
+
     
+    if correto_marca == 'CITROEN':
+        trocar_marca = correto_marca.replace('CITROEN','Citroën')
+        elemento_marca.send_keys(trocar_marca)
+    
+    else:
+        elemento_marca.send_keys(correto_marca)
+
+
+    elemento_marca.send_keys(Keys.ENTER)
+
 
     #Selecionando o Ano
     elemento_selecione_ano = chrome.find_element(By.XPATH,'//*[@id="selectAnocarro_chosen"]').click()
     
     elemento_ano = chrome.find_element(By.XPATH,'//*[@id="selectAnocarro_chosen"]/div/div/input')
-    elemento_ano.send_keys(row["ANO"])
+    elemento_ano_correto = (row["ANO"]).split('/')[0]
+    elemento_ano.send_keys(elemento_ano_correto)
     elemento_ano.send_keys(Keys.ENTER)
+
+
 
 
     #Selecionando Modelo 
     elemento_selecione_modelo = chrome.find_element(By.XPATH,'//*[@id="selectAnoModelocarro_chosen"]').click()
     
     elemento_modelo = chrome.find_element(By.XPATH,'//*[@id="selectAnoModelocarro_chosen"]/div/div/input')
-    filtro_modelo = (row["MODELO"]).split()[0]
-    elemento_modelo.send_keys(filtro_modelo)
-    elemento_modelo.send_keys(Keys.ENTER)
-
-
-    #Pesquisar Fipe
-    elemento_selecione_pesquisa = chrome.find_element(By.XPATH,'//*[@id="buttonPesquisarcarro"]').click()
-
-    #Coletar as informações da FIPE 
-    elemento_valor_fipe = chrome.find_element(By.XPATH,'//*[@id="resultadoConsultacarroFiltros"]/table/tbody/tr[8]/td[2]/p').text
-
-    #teste 
-    df['FIPE'][index] = elemento_valor_fipe
-
-    print(df)
+    correto_nome = (row["MODELO"])
     
-    time.sleep(3)
+    
+    listagem = ['- 0P -  - ','- 5P - Básico - ','- 2P - Básico - ','- 4P - Básico - ','- 3P - Básico -','- 0P - Básico -']
+
+    try:
+        for item in listagem:
+
+            if item in correto_nome:
+
+                correto_nome2 = correto_nome
+                correto_nome3 = correto_nome2.replace(item,'')
+        
+        time.sleep(2)
+
+        elemento_modelo.send_keys(correto_nome3)
+        elemento_modelo.send_keys(Keys.ENTER)
+
+
+        #Pesquisar Fipe
+        elemento_selecione_pesquisa = chrome.find_element(By.XPATH,'//*[@id="buttonPesquisarcarro"]').click()
+
+
+        #Coletar as informações da FIPE 
+        elemento_valor_fipe = chrome.find_element(By.XPATH,'//*[@id="resultadoConsultacarroFiltros"]/table/tbody/tr[8]/td[2]/p').text
 
     
-    df.to_excel('TabelaFipe.xlsx')
-    
+
+        if elemento_valor_fipe == False:
+            print('Não foi possivel pesquisar, Motivo = Precisa preencher todos os campos corretos.')
+            df['FIPE'][index] = 'Falta dados corretos.'
+            pass
+
+         #Colocar informação do valor da fipe na Coluna FIPE do execel.
+        else:
+            df['FIPE'][index] = elemento_valor_fipe
+
+
+    except:
+            df['FIPE'][index] = 'Pequisa fora do padrao'
+
+
+
+    #Cria o novo execel com os valores que estão sendo pesquisado
+    df.to_excel('Tabela_Fipe_Erros.xlsx', index=False)
+
+
+
+    df2 = pd.read_excel(r"C:\Users\Moltt\Documents\python\Tabela_Fipe_Atualizada.xlsx")
 
 
     chrome.quit()

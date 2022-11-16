@@ -21,8 +21,8 @@ url_do_forms = "https://www.ipva.fazenda.sp.gov.br/IPVANET_Consulta/Consulta.asp
 for index,row in df.iterrows():
 
     print("index: " + str(index) + " o nome é " + row ["CONTRATO"])
-    chrome = webdriver.Chrome()
-    chrome.get(url_do_forms)
+    chrome = webdriver.Chrome()#service_args=["--profile-directory=Profile 4"]) #executable_path='C:\Program Files\Google\Chrome\Application\chrome.exe',service_args=["--profile-directory=Profile 4"]) 
+    #chrome.get(url_do_forms)
 
     time.sleep(3)
 
