@@ -1,13 +1,12 @@
-from selenium import webdriver 
-from selenium.webdriver.chrome.options import Options
-import os
+correto_nome = input('Nome')
+print(correto_nome)
+    
 
-
-options = webdriver.ChromeOptions()
-options.add_argument("--user-data-dir=C:\\Users\\Moltt\\AppData\\Local\\Google\\Chrome\\User Data")
-options.add_argument('--profile-directory=Profile 4')
-
-
-
-driver = webdriver.Chrome(service_args=["--user-data-dir=C:\\Users\\Moltt\\AppData\\Local\\Google\\Chrome\\User Data",'--profile-directory=Profile 4'])
-driver.get("https://www.google.co.in")
+listagem = ['- 0P -  - ','- 5P - Básico - ','- 2P - Básico - ','- 4P - Básico - ',
+    '- 3P - Básico -','- 0P - Básico - ','- 0p - - ']
+    
+for item in listagem:
+    if item in correto_nome:
+            nome_novo = correto_nome.replace(item,'')
+            
+print(nome_novo)
