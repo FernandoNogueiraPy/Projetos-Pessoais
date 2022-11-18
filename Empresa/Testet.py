@@ -1,5 +1,7 @@
 
 
+
+
 criador = """\n / Developer/ Fernando Nogueira Costa / \n"""
 print(criador)
 
@@ -263,7 +265,7 @@ for index,row in df.iterrows():
 
     Tipo = (row ["CONTRATO"]) #Exp : 44-519190/20
     time.sleep(3)
-    #try:
+
     print(Tipo)
     Tipo2 = Tipo.split('-')[0]
     Tipo3 = int(Tipo2)
@@ -285,13 +287,10 @@ for index,row in df.iterrows():
         carros()
         
         
+        
+    
 
-    #except:
-
-        #df['FIPE'][index] = 'Não foi capaz de ler o Contrato.'
-        #df.to_excel('Tabela_Fipe_valores.xlsx', index=False)
-
-        #print('Não tem nada na linha')
+    
         
     
 
