@@ -1,12 +1,11 @@
-correto_nome = input('Nome')
-print(correto_nome)
-    
 
-listagem = ['- 0P -  - ','- 5P - Básico - ','- 2P - Básico - ','- 4P - Básico - ',
-    '- 3P - Básico -','- 0P - Básico - ','- 0p - - ']
-    
-for item in listagem:
-    if item in correto_nome:
-            nome_novo = correto_nome.replace(item,'')
-            
-print(nome_novo)
+Tipo = (input('teste')) #Exp : 44-519190/20 - 14-1081377/22
+Tipo2 = Tipo.split('-')[0]
+
+print(Tipo2)
+ListaC = ['40','41','42','43','44','45','46','47','48','49']
+
+if Tipo2 in ListaC:
+    print ('está em listac')
+else: 
+    print('não esta em listac')
