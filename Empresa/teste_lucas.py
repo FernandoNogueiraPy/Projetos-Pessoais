@@ -194,51 +194,17 @@ def carros(df,index,row):
 
     #Correção de  portas 
     #Pratica errada de programação Quebra galho.
-
-    retirar1 = '- 0P -  -  '
-    retirar2 = '- 5P - Básico - '
-    retirar3 = '- 2P - Básico - '
-    retirar4 = '- 4P - Básico - '
-    retirar5 = '- 3P - Básico -'
-    retirar6 = '- 0P - Básico - '
-    retirar7 = '- 0p - - '
-    retirar8 = '- 0P -  - '
+    listagem = ['  - 0P -  -  ','- 0P -  - ','- 5P - Básico - ','- 2P - Básico - ','- 4P - Básico - ',
+    '- 3P - Básico -','- 0P - Básico - ','- 0p - - ']
 
 
-    if retirar1 in correto_nome:
-        nome_novo = correto_nome.replace(retirar1,'')
-        elemento_modelo.send_keys(nome_novo)
 
-    elif retirar2 in correto_nome:
-        nome_novo2 = correto_nome.replace(retirar2,'')
-        elemento_modelo.send_keys(nome_novo2)
-
-    elif retirar3 in correto_nome: 
-        nome_novo3 = correto_nome.replace(retirar3,'')
-        elemento_modelo.send_keys(nome_novo3)
-    
-    elif retirar4 in correto_nome:
-        nome_novo4 = correto_nome.replace(retirar4,'')
-        elemento_modelo.send_keys(nome_novo4)
-
-    elif retirar5 in correto_nome:
-        nome_novo5 = correto_nome.replace(retirar5,'')
-        elemento_modelo.send_keys(nome_novo5)
-    
-    elif retirar6 in correto_nome:
-        nome_novo6 = correto_nome.replace(retirar6,'')
-        elemento_modelo.send_keys(nome_novo6)
-    
-    elif retirar7 in correto_nome:
-        nome_novo7 = correto_nome.replace(retirar7,'')
-        elemento_modelo.send_keys(nome_novo7)
-
-    elif retirar8 in correto_nome:
-        nome_novo8 = correto_nome.replace(retirar8,'')
-        elemento_modelo.send_keys(nome_novo8)
-
-    else: 
-        elemento_modelo.send_keys(correto_nome)
+    for item in listagem:
+        if item in correto_nome:
+            correto_nome = correto_nome.replace(item,"")
+            break
+    print(correto_nome)
+    elemento_modelo.send_keys(correto_nome)
 
     
     elemento_modelo.send_keys(Keys.ENTER)
