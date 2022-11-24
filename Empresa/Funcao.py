@@ -9,16 +9,19 @@ from selenium.webdriver.firefox.options import Options
 
 
 
-url_do_forms = "https://veiculos.fipe.org.br/#carro-comum"
-options = webdriver.ChromeOptions()
-options.add_argument('--disable-blink-features=AutomationControlled')
 
 
-def start():
+
+def Iniciar(start):
+    url_do_forms = "https://veiculos.fipe.org.br/#carro-comum"
+    options = webdriver.ChromeOptions()
+    options.add_argument('--disable-blink-features=AutomationControlled')
     global chrome
-    chrome = webdriver.Chrome(chrome_options=options)
+    chrome = webdriver.Chrome(r'C:\Users\Moltt\Documents\python\Empresa\chromedriver.exe', chrome_options=options)
     chrome.get(url_do_forms)
-    leitura(filepath)
+    leitura(filepath,start)
+    
+ 
 
 
 def clicar(xpath):
@@ -235,7 +238,7 @@ def carros(df,index,row):
     df.to_excel('Tabela_Fipe_valores.xlsx', index=False)
 
 
-def leitura(filepath):
+def leitura(filepath,start):
 
     df = pd.read_excel(filepath)
     
@@ -266,6 +269,8 @@ def leitura(filepath):
                 print('Ativou pesquisa carros')
                 carros(df,index,row)
                 print('#'*40)
+
+            start(df)
             
         except:
             print('Não foi possivel pequisar esse contrato.')
@@ -275,9 +280,9 @@ def leitura(filepath):
 def OpenFile():
     global filepath
     filepath = filedialog.askopenfilename()
-    local_arquivo = Label(root, text=filepath,font=("Arial",8))
-    local_arquivo.place(x=20,y=85)
-    entry1.insert(0,filepath)
+    #local_arquivo = Label(root, text=filepath,font=("Arial",8))
+    #local_arquivo.place(x=20,y=85)
+    #entry1.insert(0,filepath)
     
 
 def stop():
