@@ -1,29 +1,33 @@
 from tkinter import * #Bliblioteca de interface
 from tkinter.ttk import *
-from Funcao import *   #Arquivo de funções.
+from Funcao import * #Arquivo de funções.
 import threading  #Essa bliblioteca usa um processador pra cada é multiprocessing
 
 
 
 
-def inicio(start):
-    threading.Thread(target=Iniciar ,args=(start,)).start()
-    
+def inicio():
+    threading.Thread(target=Iniciar).start()
+    # threading.Thread(target=start).start()
 
 
-def start(df):
 
-    ultima_linha= df['Contrato'].iloc[-1]
-    #GB = 100
-    download = 0
-    speed = 1
-    for index,row in df:
-        time.sleep(0.05)
-        bar['value']+=(speed/ultima_linha)*100
-        download+=speed
-        percent.set(str(int((download/ultima_linha)*100))+"%")
-        text.set(str(download)+"/"+str(ultima_linha)+" GB completed")
-        root.update_idletasks()
+
+
+# def start():
+    # GB = 100
+    # download = 0
+    # speed = 1
+    # while(download<GB):
+    #     time.sleep(0.05)
+    #     bar['value']+=(speed/GB)*100
+    #     download+=speed
+    #     percent.set(f"{download/GB*100}%")
+    #     text.set(str(download)+"/"+str(GB)+" GB completed")
+    #     root.update_idletasks()
+
+
+
 
 
 
@@ -31,6 +35,8 @@ root = Tk()
 root.title('Coletor de dados FIPE.')
 root.geometry("480x400")
 root.configure(bg = "#ffffff")
+
+
 canvas = Canvas(
     root,
     bg = "#ffffff",
@@ -70,16 +76,13 @@ entry1.place(x=20,y=50)
 entry2 = Entry(root,font=("Arial",15),width=31)
 entry2.place(x=20,y=110)
 
-btn1 = Button(root, text='Open',command= OpenFile , width=8,font=('Arial',10))
+btn1 = Button(root,text='Open',command= OpenFile , width=8,font=('Arial',10))
 btn1.place(x=380,y=50)
 
 btn4 = Button(root, text='Enviar', width=8,font=('Arial',10))
 btn4 = btn4.place(x=380,y=110)
 
-def testelinhas():
-    inicio(start)
-
-btn2 = Button(root, text='Iniciar' ,command= testelinhas ,width=8,font=('Arial',10))
+btn2 = Button(root, text='Iniciar' ,command= inicio ,width=8,font=('Arial',10))
 btn2.place(x=380,y=360)
 
 btn3 = Button(root, text='Parar', command= stop , width=8,font=('Arial',10))

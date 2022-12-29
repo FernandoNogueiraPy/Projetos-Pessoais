@@ -6,24 +6,22 @@ from selenium.webdriver.common.keys import Keys
 import pandas as pd 
 import time
 from selenium.webdriver.firefox.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 
 
 
-
-def Iniciar(start):
+def Iniciar():
     url_do_forms = "https://veiculos.fipe.org.br/#carro-comum"
     options = webdriver.ChromeOptions()
     options.add_argument('--disable-blink-features=AutomationControlled')
     global chrome
-    chrome = webdriver.Chrome(r'C:\Users\Moltt\Documents\python\Empresa\chromedriver.exe', chrome_options=options)
+    chrome = webdriver.Chrome(ChromeDriverManager().install())#, chrome_options=options)
     chrome.get(url_do_forms)
-    leitura(filepath,start)
+    leitura(filepath)
     
  
-
-
 def clicar(xpath):
     lock = True
     while lock == True:
@@ -232,16 +230,17 @@ def carros(df,index,row):
 
     #Colocar informação do valor da fipe na Coluna FIPE do execel.
     else:
+        pd.options.mode.chained_assignment = None
         df['FIPE'][index] = elemento_valor_fipe
         
     #Cria o novo execel com os valores que estão sendo pesquisado
     df.to_excel('Tabela_Fipe_valores.xlsx', index=False)
 
 
-def leitura(filepath,start):
+def leitura(filepath):
 
     df = pd.read_excel(filepath)
-    
+    tamanho = df.index.stop
     for index,row in df.iterrows():
 
         Tipo = row ["CONTRATO"] #Exp : 44-519190/20
@@ -270,12 +269,18 @@ def leitura(filepath,start):
                 carros(df,index,row)
                 print('#'*40)
 
-            start(df)
+            #start(df)
             
         except:
             print('Não foi possivel pequisar esse contrato.')
             df['FIPE'][index]= 'Não foi possivel pesquisar '
+        
+        finally:
+            progresso = 100/tamanho
+            bar["value"] += progresso
+            
 
+        
 
 def OpenFile():
     global filepath

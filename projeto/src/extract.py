@@ -22,7 +22,17 @@ def Iniciar():
     chrome.get(url_do_forms)
     leitura(filepath)
 
+
+def Iniciar3():
+    url_do_forms = "https://veiculos.fipe.org.br/#carro-comum"
+    options = webdriver.ChromeOptions()
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    global chrome
+    chrome = webdriver.Chrome()
+    chrome.get(url_do_forms)
+    leitura(filepath)
     
+ 
 def clicar(xpath):
     lock = True
     while lock == True:
@@ -117,7 +127,7 @@ def caminhoes(df,index,row):
 
 
     #Cria o novo execel com os valores que estão sendo pesquisado
-    df.to_excel(f"{inter.nome_arquivo}.xlsx", index=False)
+    df.to_excel('Tabela_Fipe_valores.xlsx', index=False)
 
    
     time.sleep(4)
@@ -235,7 +245,7 @@ def carros(df,index,row):
         df['FIPE'][index] = elemento_valor_fipe
         
     #Cria o novo execel com os valores que estão sendo pesquisado
-    df.to_excel(f"{inter.nome_arquivo}.xlsx", index=False)
+    df.to_excel('Tabela_Fipe_valores.xlsx', index=False)
 
 
 def leitura(filepath):
@@ -353,19 +363,16 @@ def pega_debitos(df,index,row):
         print(elemento_total_debitos)
         df['DEBITOS TOTAIS'][index] = elemento_total_debitos
 
-        df.to_excel(f"{inter.nome_arquivo2}.xlsx", index=False)
+        df.to_excel('Tabela_Fipe_Valores.xlsx', index=False)
 
         time.sleep(2)
 
         chrome.back()
 
 def iniciar2():
-    
     url_do_forms = "https://www.ipva.fazenda.sp.gov.br/IPVANET_Consulta/Consulta.aspx"
-    options = webdriver.ChromeOptions()
-    options.add_argument('--disable-blink-features=AutomationControlled')
     global chrome
-    chrome = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=options) 
+    chrome = webdriver.Chrome(executable_path=r'C:\Users\Moltt\Documents\python\Empresa\chromedriver.exe') 
     chrome.get(url_do_forms)
     leitura2(filepath)
 

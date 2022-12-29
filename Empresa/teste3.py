@@ -26,5 +26,6 @@ bar.pack(pady=10)
 percentLabel = Label(window,textvariable=percent).pack()
 taskLabel = Label(window,textvariable=text).pack()
 
-button = Button(window,text="download",command=start).pack()
 
+
+window.mainloop()
