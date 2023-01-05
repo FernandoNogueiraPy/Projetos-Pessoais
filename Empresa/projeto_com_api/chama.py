@@ -1,17 +1,54 @@
+import pandas as pd 
 from selenium import webdriver
+from threading import Thread
+from webdriver_manager.chrome import ChromeDriverManager
+from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import pandas as pd 
 from selenium.webdriver.support.select import Select
 from anticaptchaofficial.recaptchav2proxyless import *
-import time
 
 
-nome_do_arquivo = 'TabelaFipe.xlsx'
-df = pd.read_excel(r"C:\Users\Moltt\Documents\python\Empresa\GERAL_MODELO2.xlsx")
+df = pd.read_excel('TestePrincipal.xlsx')
+
+
+
+class NotDivisibleList(Exception):
+    pass
+
+
+def separarlista(lista:list,n:int):
+    listas = []
+    if len(lista) % n == 0:
+        parou = 0
+        corte = int(len(lista) / n)
+        for _ in range(n):
+            atual_lista = lista[parou:corte]
+            listas.append(atual_lista)
+            parou = corte
+            corte += corte
+        return listas
+    else:
+        raise NotDivisibleList(f"{n} não pode dividir {len(lista)} que e o tamanho da lista")
+
+
+listas = separarlista(df,2)  #pares 
+
+
+contador = 0
+
+
+
+        
 url_do_forms = "https://www.ipva.fazenda.sp.gov.br/IPVANET_Consulta/Consulta.aspx"
-chrome = webdriver.Chrome(executable_path=r'C:\Users\Moltt\Documents\python\Empresa\chromedriver.exe') 
+options = webdriver.ChromeOptions()
+options.add_argument('--disable-blink-features=AutomationControlled')
+chrome = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=options)
 chrome.get(url_do_forms)
+    
+       
+    
+        
 
 
 
@@ -76,7 +113,19 @@ def pega_debitos(index,row):
         chrome.back()
 
 
-    
 
-for index,row in df.iterrows():
-    pega_debitos(index,row)
+
+
+for df in listas: #10 linhas 
+    Thread(target=pega_debitos).start()
+    contador = contador + 1 
+    print(contador)
+    print(df)
+
+    if contador <= 50 :
+        limitar()
+
+
+
+
+
