@@ -7,10 +7,8 @@ def altera_placa(placa:str):
                 nova_placa += char
             else:
                 nova_placa += lista[int(placa[4])]
+
     else:
-        for index,char in enumerate(placa):
-            if index != 4:
-                nova_placa += char
-            else:
-                nova_placa += f"{lista.index(placa[4])}"
+        return placa
+        
     return nova_placa
